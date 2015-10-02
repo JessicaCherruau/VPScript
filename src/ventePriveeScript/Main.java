@@ -11,13 +11,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Main {
-	private static final String EMAIL = "jess****@hotmail.fr";
-	private static final String MDP = "****";
-	private static final String SALE_NO = "47489"; // last number in url
+	private static final String SALE_NO = "47413"; // last number in url
 	public static final String DOMAIN_NAME = "http://fr.vente-privee.com/";
 	private static final String[] UNWANTED_BRANDS = {  };
 
-	public static void main(String[] args) {
+	public static void startScript(String email, String pwd){
 		// Create a new instance of the Firefox driver
 		// Notice that the remainder of the code relies on the interface, 
 		// not the implementation.
@@ -27,8 +25,8 @@ public class Main {
 
 		if(driver.getCurrentUrl().contains("authentication")){
 			// Find the text input element by its name
-			driver.findElement(By.xpath("//*[@id=\"mail\"]")).sendKeys(EMAIL);
-			driver.findElement(By.xpath("//*[@id=\"mdp\"]")).sendKeys(MDP);
+			driver.findElement(By.xpath("//*[@id=\"mail\"]")).sendKeys(email);
+			driver.findElement(By.xpath("//*[@id=\"mdp\"]")).sendKeys(pwd);
 			driver.findElement(By.xpath("//*[@id=\"loginBtn\"]")).click();
 		}
 
@@ -48,10 +46,8 @@ public class Main {
 		}
 		System.out.println("Page title is: " + driver.getTitle());
 
-		//Close the browser
-		//        driver.quit();
 	}
-
+	
 	public static boolean validModel(String quantity, String desc){
 		if(quantity != null && !quantity.equals("0")){
 			if(desc.contains("(FR)")){
